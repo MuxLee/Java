@@ -1,0 +1,110 @@
+package MakeTeam;
+
+import java.util.*;
+
+class Squard {
+	protected int choice;
+	public void Squard() {
+		System.out.println("\n< - - - 선수 메뉴 - - - ->");
+		System.out.print("1. 선수 자동생성\n2. 선수 수동생성 \n>> ");
+		Scanner input = new Scanner(System.in); choice = input.nextInt();
+		makeTeam();
+	}
+	public void makeTeam() {
+		Teamake callName = new Teamake();
+		switch(choice){
+		case 1:
+			callName.AutoMake();
+			break;
+		case 2:
+			callName.Passive();
+			}			
+		}
+}
+
+class Teamake {
+	protected String selectionAuto[] = {"마르크안드레 테어슈테켄","제라르 피케","넬송 세메두","조르디 알바","세르히오 부스케츠","사무엘 움티티","데니스 수아레스","이반 라키티치","파코 알카세르","루이스 수아레스","레오넬 메시"};
+	protected int selecNumAuto[] = {1,3,2,18,5,23,6,4,17,9,10};
+	protected String selecPosition[] = {"GK","DF","DF","DF","MF","DF","MF","MF","FW","FW","FW"};
+	protected String PassiveSelect[] = new String[11];
+	protected int PassiveNum[] = new int[11];
+	protected String PassivePosition[] = new String[11];
+	public void AutoMake() {
+		for(int count=0; count<selectionAuto.length; count++)
+			System.out.println("선수명 : "+selectionAuto[count]+"\n등번호 : "+selecNumAuto[count]+"\n포지션 : "+selecPosition[count]+"\n");
+	}
+	
+	public void Passive() {
+		for(int count=0; count<PassiveSelect.length; count++) {
+			System.out.print("선수정보 입력 : ");
+			Scanner input = new Scanner(System.in);
+			PassiveSelect[count] = input.next();
+			PassiveNum[count] = input.nextInt();
+			PassivePosition[count] = input.next();
+			}
+		}
+}
+
+class Tutorial {
+	
+	private String Director;
+	private String TeamName;
+	
+	public void Name() {
+		System.out.print("감독님의 성함은? >> "); Scanner InputDirector = new Scanner(System.in);
+		Director = InputDirector.nextLine();
+	}
+	public void Team() {
+		System.out.print("감독님의 팀 이름은? >> "); Scanner InputTeamName = new Scanner(System.in);
+		TeamName = InputTeamName.nextLine();
+		}
+	public String NameCall() {
+		return Director;
+	}
+	public String TeamNameCall() {
+		return TeamName;
+	}
+}
+
+class T_Main {
+	private String save1, save2;
+	public void T_Main() {
+		System.out.println("= = = = Squard Team 생성  = = = =\n");
+		Tutorial Mk = new Tutorial();
+		Mk.Name(); Mk.Team();
+		System.out.println("\n= = = = 팀이 생성되었습니다. = = = =");
+		save1 = Mk.NameCall(); save2 = Mk.TeamNameCall();
+		myTeam gm = new myTeam(save1, save2);
+		gm.myTeam();
+	}
+}
+
+class GameMain {
+	protected String myCharacter;
+	protected String TeamName;
+	protected String Director;
+	protected int choice;
+	public GameMain(){
+		
+	}
+	public GameMain(String Director, String TeamName) {
+		this.Director=Director; this.TeamName=TeamName;
+	}
+}
+class myTeam extends GameMain {
+	public myTeam(String Director, String TeamName) {
+		super(Director, TeamName);
+	}
+	public void myTeam() {
+		
+	}
+}
+
+public class MakeTeam {
+	public static void main(String[] args) {
+		T_Main Start = new T_Main();
+		Start.T_Main();
+		Squard make = new Squard();
+		make.Squard();
+	}
+}
