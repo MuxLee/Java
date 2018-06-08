@@ -3,9 +3,31 @@ package MakeTeam;
 import java.util.*;
 
 class Infinity {
-	public void Infinity() {
+	private int num=0;
+	public void Infinity(int num) {
+		this.num=num;
+		int count=0, choice;
+		Tutorial Change = new Tutorial();
+		AutoMake Am = new AutoMake();
+		Passive Pv = new Passive();
 		while(true) {
-			System.out.println("적용 완료");
+			System.out.println("< = = = Main Menu = = = >");
+			System.out.println("1. My Team\n2. 전략짜기\n3. 방출하기");
+			Scanner NumChoice = new Scanner(System.in);
+			choice = NumChoice.nextInt();
+			switch(choice) {
+			case 1:
+				if(num==0)
+					Am.AutoMake();
+				
+				else if(num==1)
+					Pv.PassiveShow();
+					
+			case 2:
+				
+			case 3:
+				
+			}
 		}
 	}
 }
@@ -19,17 +41,18 @@ class Squard {
 		makeTeam();
 	}
 	public void makeTeam() {
+		int count=0;
 		AutoMake AM = new AutoMake();
 		Passive Ps = new Passive();
 		Infinity If = new Infinity();
 		switch(choice){
 		case 1:
 			AM.AutoMake();
-			If.Infinity();
+			If.Infinity(count);
 			break;
 		case 2:
 			Ps.Passive();
-			If.Infinity();
+			If.Infinity(count=1);
 			break;
 			}			
 		}
@@ -55,9 +78,9 @@ class Teamake {
 }
 
 class AutoMake {
-	protected String selectionAuto[] = {"마르크안드레 테어슈테켄","제라르 피케","넬송 세메두","조르디 알바","세르히오 부스케츠","사무엘 움티티","데니스 수아레스","이반 라키티치","파코 알카세르","루이스 수아레스","레오넬 메시"};
-	protected int selecNumAuto[] = {1,3,2,18,5,23,6,4,17,9,10};
-	protected String selecPosition[] = {"GK","DF","DF","DF","MF","DF","MF","MF","FW","FW","FW"};
+	public String selectionAuto[] = {"마르크안드레 테어슈테켄","제라르 피케","넬송 세메두","조르디 알바","세르히오 부스케츠","사무엘 움티티","데니스 수아레스","이반 라키티치","파코 알카세르","루이스 수아레스","레오넬 메시"};
+	public int selecNumAuto[] = {1,3,2,18,5,23,6,4,17,9,10};
+	public String selecPosition[] = {"GK","DF","DF","DF","MF","DF","MF","MF","FW","FW","FW"};
 	static Teamake get = new Teamake();
 	static String TeamName = get.NameCall();
 	static String Director = get.TeamNameCall();
@@ -72,9 +95,9 @@ class AutoMake {
 	}
 }
 class Passive {
-	protected String PassiveSelect[] = new String[11];
-	protected int PassiveNum[] = new int[11];
-	protected String PassivePosition[] = new String[11];
+	public String PassiveSelect[] = new String[11];
+	public int PassiveNum[] = new int[11];
+	public String PassivePosition[] = new String[11];
 	static Teamake get = new Teamake();
 	static String TeamName = get.NameCall();
 	static String Director = get.TeamNameCall();
@@ -90,8 +113,19 @@ class Passive {
 		System.out.println("\n< - - - My Team - - - >");
 		System.out.println("\n팀 이름 : "+TeamName);
 		System.out.println("감독 : "+Director+"\n");
-		for(int count=0; count<PassiveSelect.length; count++)
+		for(int count=0; count<PassiveSelect.length; count++){
 			System.out.println("선수명 : "+PassiveSelect[count]+"\n등번호 : "+PassiveNum[count]+"\n포지션 : "+PassivePosition[count]+"\n");
+			}
+		}
+	
+	public void PassiveShow() {		// 고쳐라 시 바유ㅠ
+		Passive come = new Passive();
+		System.out.println("\n< - - - My Team - - - >");
+		System.out.println("\n팀 이름 : "+TeamName);
+		System.out.println("감독 : "+Director+"\n");
+		for(int count=0; count<PassiveSelect.length; count++){
+			System.out.println("선수명 : "+come.PassiveSelect[count]+"\n등번호 : "+come.PassiveNum[count]+"\n포지션 : "+come.PassivePosition[count]+"\n");
+			}	
 		}
 }
 
@@ -99,14 +133,13 @@ class Tutorial {
 	
 	private String Director;
 	private String TeamName;
-	
 	public void Name() {
-		System.out.print("감독님의 성함은? >> "); Scanner InputDirector = new Scanner(System.in);
-		Director = InputDirector.nextLine();
+			System.out.print("감독님의 성함은? >> "); Scanner InputDirector = new Scanner(System.in);
+			Director = InputDirector.nextLine();
 	}
 	public void Team() {
-		System.out.print("감독님의 팀 이름은? >> "); Scanner InputTeamName = new Scanner(System.in);
-		TeamName = InputTeamName.nextLine();
+			System.out.print("감독님의 팀 이름은? >> "); Scanner InputTeamName = new Scanner(System.in);
+			TeamName = InputTeamName.nextLine();
 		}
 	public String NameCall() { return Director; }
 	public String TeamNameCall() { return TeamName; }
