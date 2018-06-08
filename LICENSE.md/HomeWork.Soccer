@@ -2,6 +2,14 @@ package MakeTeam;
 
 import java.util.*;
 
+class Infinity {
+	public void Infinity() {
+		while(true) {
+			System.out.println("적용 완료");
+		}
+	}
+}
+
 class Squard {
 	protected int choice;
 	public void Squard() {
@@ -13,12 +21,15 @@ class Squard {
 	public void makeTeam() {
 		AutoMake AM = new AutoMake();
 		Passive Ps = new Passive();
+		Infinity If = new Infinity();
 		switch(choice){
 		case 1:
 			AM.AutoMake();
+			If.Infinity();
 			break;
 		case 2:
 			Ps.Passive();
+			If.Infinity();
 			break;
 			}			
 		}
