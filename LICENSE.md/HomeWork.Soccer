@@ -11,38 +11,58 @@ class Squard {
 		makeTeam();
 	}
 	public void makeTeam() {
-		Teamake callName = new Teamake();
+		AutoMake AM = new AutoMake();
+		Passive Ps = new Passive();
 		switch(choice){
 		case 1:
-			callName.AutoMake();
+			AM.AutoMake();
 			break;
 		case 2:
-			callName.Passive();
+			Ps.Passive();
 			}			
 		}
 }
 
 class Teamake {
-	protected String selectionAuto[] = {"마르크안드레 테어슈테켄","제라르 피케","넬송 세메두","조르디 알바","세르히오 부스케츠","사무엘 움티티","데니스 수아레스","이반 라키티치","파코 알카세르","루이스 수아레스","레오넬 메시"};
-	protected int selecNumAuto[] = {1,3,2,18,5,23,6,4,17,9,10};
-	protected String selecPosition[] = {"GK","DF","DF","DF","MF","DF","MF","MF","FW","FW","FW"};
+	protected String selectionAuto[];
+	protected int selecNumAuto[];
+	protected String selecPosition[];
 	protected String PassiveSelect[] = new String[11];
 	protected int PassiveNum[] = new int[11];
 	protected String PassivePosition[] = new String[11];
-	protected String TeamName;
-	protected String Director;
+	static String TeamName;
+	static String Director;
 	
 	public Teamake(){}
 	public Teamake(String TeamName, String Director){
 		this.TeamName=TeamName; this.Director=Director;
-		System.out.println(TeamName);
 	}
+	public String NameCall() { return this.Director; }
+	public String TeamNameCall() { return this.TeamName; }
 	
+}
+
+class AutoMake {
+	protected String selectionAuto[] = {"마르크안드레 테어슈테켄","제라르 피케","넬송 세메두","조르디 알바","세르히오 부스케츠","사무엘 움티티","데니스 수아레스","이반 라키티치","파코 알카세르","루이스 수아레스","레오넬 메시"};
+	protected int selecNumAuto[] = {1,3,2,18,5,23,6,4,17,9,10};
+	protected String selecPosition[] = {"GK","DF","DF","DF","MF","DF","MF","MF","FW","FW","FW"};
+	static Teamake get = new Teamake();
+	static String TeamName = get.NameCall();
+	static String Director = get.TeamNameCall();
+	
+	public AutoMake() {}
 	public void AutoMake() {
-		myTeam gm = new myTeam();
+		System.out.println("< - - - My Team - - - >");
+		System.out.println("= = = = "+TeamName+" = = = =");
+		System.out.println("감독 : " + Director);
 		for(int count=0; count<selectionAuto.length; count++)
 			System.out.println("선수명 : "+selectionAuto[count]+"\n등번호 : "+selecNumAuto[count]+"\n포지션 : "+selecPosition[count]+"\n");
 	}
+}
+class Passive {
+	protected String PassiveSelect[] = new String[11];
+	protected int PassiveNum[] = new int[11];
+	protected String PassivePosition[] = new String[11];
 	
 	public void Passive() {
 		for(int count=0; count<PassiveSelect.length; count++) {
