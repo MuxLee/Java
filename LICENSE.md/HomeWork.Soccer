@@ -19,6 +19,7 @@ class Squard {
 			break;
 		case 2:
 			Ps.Passive();
+			break;
 			}			
 		}
 }
@@ -52,9 +53,9 @@ class AutoMake {
 	
 	public AutoMake() {}
 	public void AutoMake() {
-		System.out.println("< - - - My Team - - - >");
-		System.out.println("= = = = "+TeamName+" = = = =");
-		System.out.println("감독 : " + Director);
+		System.out.println("\n< - - - My Team - - - >");
+		System.out.println("\n팀 이름 : "+TeamName);
+		System.out.println("감독 : "+Director+"\n");
 		for(int count=0; count<selectionAuto.length; count++)
 			System.out.println("선수명 : "+selectionAuto[count]+"\n등번호 : "+selecNumAuto[count]+"\n포지션 : "+selecPosition[count]+"\n");
 	}
@@ -63,6 +64,9 @@ class Passive {
 	protected String PassiveSelect[] = new String[11];
 	protected int PassiveNum[] = new int[11];
 	protected String PassivePosition[] = new String[11];
+	static Teamake get = new Teamake();
+	static String TeamName = get.NameCall();
+	static String Director = get.TeamNameCall();
 	
 	public void Passive() {
 		for(int count=0; count<PassiveSelect.length; count++) {
@@ -72,6 +76,11 @@ class Passive {
 			PassiveNum[count] = input.nextInt();
 			PassivePosition[count] = input.next();
 			}
+		System.out.println("\n< - - - My Team - - - >");
+		System.out.println("\n팀 이름 : "+TeamName);
+		System.out.println("감독 : "+Director+"\n");
+		for(int count=0; count<PassiveSelect.length; count++)
+			System.out.println("선수명 : "+PassiveSelect[count]+"\n등번호 : "+PassiveNum[count]+"\n포지션 : "+PassivePosition[count]+"\n");
 		}
 }
 
