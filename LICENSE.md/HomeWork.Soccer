@@ -29,7 +29,17 @@ class Teamake {
 	protected String PassiveSelect[] = new String[11];
 	protected int PassiveNum[] = new int[11];
 	protected String PassivePosition[] = new String[11];
+	protected String TeamName;
+	protected String Director;
+	
+	public Teamake(){}
+	public Teamake(String TeamName, String Director){
+		this.TeamName=TeamName; this.Director=Director;
+		System.out.println(TeamName);
+	}
+	
 	public void AutoMake() {
+		myTeam gm = new myTeam();
 		for(int count=0; count<selectionAuto.length; count++)
 			System.out.println("선수명 : "+selectionAuto[count]+"\n등번호 : "+selecNumAuto[count]+"\n포지션 : "+selecPosition[count]+"\n");
 	}
@@ -58,16 +68,13 @@ class Tutorial {
 		System.out.print("감독님의 팀 이름은? >> "); Scanner InputTeamName = new Scanner(System.in);
 		TeamName = InputTeamName.nextLine();
 		}
-	public String NameCall() {
-		return Director;
-	}
-	public String TeamNameCall() {
-		return TeamName;
-	}
+	public String NameCall() { return Director; }
+	public String TeamNameCall() { return TeamName; }
 }
 
 class T_Main {
 	private String save1, save2;
+	
 	public void T_Main() {
 		System.out.println("= = = = Squard Team 생성  = = = =\n");
 		Tutorial Mk = new Tutorial();
@@ -75,7 +82,6 @@ class T_Main {
 		System.out.println("\n= = = = 팀이 생성되었습니다. = = = =");
 		save1 = Mk.NameCall(); save2 = Mk.TeamNameCall();
 		myTeam gm = new myTeam(save1, save2);
-		gm.myTeam();
 	}
 }
 
@@ -84,19 +90,15 @@ class GameMain {
 	protected String TeamName;
 	protected String Director;
 	protected int choice;
-	public GameMain(){
-		
-	}
-	public GameMain(String Director, String TeamName) {
-		this.Director=Director; this.TeamName=TeamName;
-	}
+	
+	public GameMain() {}
+	public GameMain(String Director, String TeamName) { this.Director=Director; this.TeamName=TeamName; Teamake give = new Teamake(this.Director, this.TeamName);}
 }
 class myTeam extends GameMain {
+	
+	public myTeam() {}
 	public myTeam(String Director, String TeamName) {
 		super(Director, TeamName);
-	}
-	public void myTeam() {
-		
 	}
 }
 
