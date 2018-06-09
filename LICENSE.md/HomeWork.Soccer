@@ -5,7 +5,7 @@ class Infinity {
     private int num = 0;
 
     public void Infinity(int num) {
-        this.num = num;
+        this.num += num;
         int count = 0, choice;
         Infinity If = new Infinity();
         Tutorial Change = new Tutorial();
@@ -19,7 +19,7 @@ class Infinity {
             choice = NumChoice.nextInt();
             if(choice>3 || choice<1) {
                 System.out.println("옳지 않는 번호 선택입니다!");
-                return;
+                break;
             }
             switch (choice) {
                 case 1:
@@ -32,7 +32,10 @@ class Infinity {
                 case 2:
                     St.Strategy();
                 case 3:
-                    Am.Release();
+                    if(num==0)
+                        Am.AutoRelease();
+                    else if(num==1)
+                        Pv.PassiveRelease();
             }
         }
     }
@@ -103,9 +106,9 @@ class Teamake {
 
 class AutoMake {
     
-    public String selectionAuto[] = {"마르크안드레 테어슈테켄", "제라르 피케", "넬송 세메두", "조르디 알바", "세르히오 부스케츠", "사무엘 움티티", "데니스 수아레스", "이반 라키티치", "파코 알카세르", "루이스 수아레스", "레오넬 메시"};
-    public int selecNumAuto[] = {1, 3, 2, 18, 5, 23, 6, 4, 17, 9, 10};
-    public String selecPosition[] = {"GK", "DF", "DF", "DF", "MF", "DF", "MF", "MF", "FW", "FW", "FW"};
+    static String selectionAuto[] = {"마르크안드레 테어슈테켄", "제라르 피케", "넬송 세메두", "조르디 알바", "세르히오 부스케츠", "사무엘 움티티", "데니스 수아레스", "이반 라키티치", "파코 알카세르", "루이스 수아레스", "레오넬 메시"};
+    static String selecNumAuto[] = {"1", "3", "2", "18", "5", "23", "6", "4", "17", "9", "10"};
+    static String selecPosition[] = {"GK", "DF", "DF", "DF", "MF", "DF", "MF", "MF", "FW", "FW", "FW"};
     static Teamake get = new Teamake();
     static String TeamName = get.NameCall();
     static String Director = get.TeamNameCall();
@@ -123,38 +126,80 @@ class AutoMake {
         }
     }
     
-    public void Release() {
+    public void AutoRelease() {
+        int check=0;
         System.out.print("방출 하실 선수의 [이름]을 입력해주세요! >> ");
         input = new Scanner(System.in); String StrName = input.nextLine();
         for(int count=0; count<selectionAuto.length; count++) {
             if(StrName.equals(selectionAuto[count])) {
-                selectionAuto[count]=null; selectionAuto[count]="방출";
-                selecNumAuto[count]*=0; selecNumAuto[count]=-1;
-                selecPosition[count]=null; selecPosition[count]="방출";
+                check++;
             }
         }
+        for(int count=0; count<selectionAuto.length; count++) {
+            if(StrName.equals(selectionAuto[count])) {
+                if(check==1){
+                    selectionAuto[count]=null; selectionAuto[count]="방출";
+                    selecNumAuto[count]=null; selecNumAuto[count]="방출";
+                    selecPosition[count]=null; selecPosition[count]="방출";
+                }
+            }
+        }
+        if(check>1) {
+            System.out.println("이름이 같은 선수가 존재합니다!");
+            for(int con=0; con<selectionAuto.length; con++){
+                if(StrName.equals(selectionAuto[con]))
+                    System.out.println("선수명 : "+selectionAuto[con]+"\n등번호 : "+selecNumAuto[con]+"\n포지션 : "+selecPosition[con]+"\n");
+            }
+            System.out.print("방출 하실 선수의 [번호]를 입력해주세요! >> ");
+            input = new Scanner(System.in); String StrNum = input.next();
+            for(int count=0; count<selecNumAuto.length; count++) {
+                if(StrNum.equals(selecNumAuto[count])) {
+                    selectionAuto[count]=null; selectionAuto[count]="방출";
+                    selecNumAuto[count]=null; selecNumAuto[count]="방출";
+                    selecPosition[count]=null; selecPosition[count]="방출";
+                }
+            }
+        }
+        Infinity If = new Infinity();
+        If.Infinity(0);
     }
 }
 
 class Passive {
 
     static String PassiveSelect[] = new String[11];
-    static int PassiveNum[] = new int[11];
+    static String PassiveNum[] = new String[11];
     static String PassivePosition[] = new String[11];
     static Teamake get = new Teamake();
     static String TeamName = get.NameCall();
     static String Director = get.TeamNameCall();
+    Scanner input = new Scanner(System.in);
 
     public void Passive() {
-        
+        Passive Ps = new Passive();
+        int con=0, numCheck=1;
         System.out.println("< [이름] / [번호] / [포지션] > 순으로 입력");
         System.out.println("Ex): <홍길동 0  GK>");
         for (int count = 0; count < PassiveSelect.length; count++) {
-            System.out.print("선수정보 입력 : ");
+            System.out.print(numCheck+"번째 선수정보 입력 : ");
+            numCheck++;
             Scanner input = new Scanner(System.in);
             PassiveSelect[count] = input.next();
-            PassiveNum[count] = input.nextInt();
+            PassiveNum[count] = input.next();
             PassivePosition[count] = input.next();
+            for(int cu=0; cu<PassiveNum.length; cu++) {
+                if(count!=cu)
+                    if(PassiveNum[count].equals(PassiveNum[cu])){
+                        if(PassiveNum[count]==null || PassiveNum[cu]==null){
+                            continue;
+                        }
+                        else if(PassiveNum[count]!=null || PassiveNum[cu]!=null){
+                            System.out.println("등번호가 중복될 수 없습니다! 다시 시도하세요!\n");
+                            Ps.cleaner();
+                            Ps.Passive();
+                        }
+                    }
+            }
         }
         System.out.println("\n< - - - My Team - - - >");
         System.out.println("\n팀 이름 : " + TeamName);
@@ -163,6 +208,14 @@ class Passive {
             System.out.println("선수명 : " + PassiveSelect[count] + "\n등번호 : " + PassiveNum[count] + "\n포지션 : " + PassivePosition[count] + "\n");
         }
     }
+        
+        public void cleaner() {
+            for(int PNum=0; PNum<PassiveNum.length; PNum++) {
+                PassiveSelect[PNum]=null;
+                PassiveSelect[PNum]=null;
+                PassivePosition[PNum]=null;
+            }
+        }
 
     public void PassiveShow() {
         Passive come = new Passive();
@@ -172,12 +225,52 @@ class Passive {
         for (int count = 0; count < PassiveSelect.length; count++) {
             System.out.println("선수명 : " + come.PassiveSelect[count] + "\n등번호 : " + come.PassiveNum[count] + "\n포지션 : " + come.PassivePosition[count] + "\n");
         }
+        Infinity If = new Infinity();
+        If.Infinity(1);
+    }
+    
+    public void PassiveRelease() {
+        int check=0;
+        System.out.print("방출 하실 선수의 [이름]을 입력해주세요! >> ");
+        input = new Scanner(System.in); String StrName = input.nextLine();
+        for(int count=0; count<PassiveSelect.length; count++) {
+            if(StrName.equals(PassiveSelect[count])) {
+                check++;
+            }
+        }
+        for(int count=0; count<PassiveSelect.length; count++) {
+            if(StrName.equals(PassiveSelect[count])) {
+                if(check==1){
+                    PassiveSelect[count]=null; PassiveSelect[count]="방출";
+                    PassiveNum[count]=null; PassiveNum[count]="방출";
+                    PassivePosition[count]=null; PassivePosition[count]="방출";
+                }
+            }
+        }
+        if(check>1) {
+            System.out.println("이름이 같은 선수가 존재합니다!");
+            for(int con=0; con<PassiveSelect.length; con++){
+                if(StrName.equals(PassiveSelect[con]))
+                    System.out.println("선수명 : "+PassiveSelect[con]+"\n등번호 : "+PassiveNum[con]+"\n포지션 : "+PassivePosition[con]+"\n");
+            }
+            System.out.print("방출 하실 선수의 [번호]를 입력해주세요! >> ");
+            input = new Scanner(System.in); String StrNum = input.next();
+            for(int count=0; count<PassiveNum.length; count++) {
+                if(StrNum.equals(PassiveNum[count])) {
+                    PassiveSelect[count]=null; PassiveSelect[count]="방출";
+                    PassiveNum[count]=null; PassiveNum[count]="방출";
+                    PassivePosition[count]=null; PassivePosition[count]="방출";
+                }
+            }
+        }
+        Infinity If = new Infinity();
+        If.Infinity(1);
     }
 }
 
 class Strategy {
     static int num1; static int num2; static int num3; static int num4;
-    private int count=0, save1=0, save2=0, save3=0, save4=0;
+    static int count=0, save1=0, save2=0, save3=0, save4=0;
     public void Strategy() {
         System.out.println("\n<- - - 전술 설정 - - -> ");
         System.out.print("전술을 입력해주세요 >> ");
@@ -185,16 +278,23 @@ class Strategy {
         Scanner input = new Scanner(System.in);
         num1 = input.nextInt(); num2 = input.nextInt();
         num3 = input.nextInt(); num4 = input.nextInt();
+        if(num1+num2+num3+num4!=10){
+            System.out.println("전술의 모든 합은 10이여야 합니다!");
+            Strategy St = new Strategy();
+            St.Strategy();
+        }
+        if(count>0) {
+            System.out.println("이전 전술은 '"+save1+"-"+save2+"-"+save3+"-"+save4+"' 였습니다.");
+            System.out.println("바뀐 전술은'"+num1+"-"+num2+"-"+num3+"-"+num4+"' 로 설정되었습니다\n");
+            save1*=0; save2*=0; save3*=0; save4*=0;
+        }
         if(count==0){
             System.out.println("전술이 '"+num1+"-"+num2+"-"+num3+"-"+num4+"' 로 설정되었습니다");
             save1=num1; save2=num2; save3=num3; save4=num4;
             count++;
         }
-        else{
-            System.out.println("이전 전술은 '"+save1+"-"+save2+"-"+save3+"-"+save4+"' 였습니다.");
-            System.out.println("바뀐 전술은'"+num1+"-"+num2+"-"+num3+"-"+num4+"' 로 설정되었습니다\n");
-            save1*=0; save2*=0; save3*=0; save4*=0;
-        }
+        Infinity If = new Infinity();
+        If.Infinity(0);
     }
 }
 
