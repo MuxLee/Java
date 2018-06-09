@@ -2,10 +2,10 @@ import java.util.*;
 
 class Infinity {
 
-    private int num = 0;
+    private int num = 1;
 
     public void Infinity(int num) {
-        this.num += num;
+        this.num *= num;
         int count = 0, choice;
         Infinity If = new Infinity();
         Tutorial Change = new Tutorial();
@@ -177,6 +177,7 @@ class Passive {
 
     public void Passive() {
         Passive Ps = new Passive();
+        Squard Sq = new Squard();
         int con=0, numCheck=1;
         System.out.println("< [이름] / [번호] / [포지션] > 순으로 입력");
         System.out.println("Ex): <홍길동 0  GK>");
@@ -190,14 +191,9 @@ class Passive {
             for(int cu=0; cu<PassiveNum.length; cu++) {
                 if(count!=cu)
                     if(PassiveNum[count].equals(PassiveNum[cu])){
-                        if(PassiveNum[count]==null || PassiveNum[cu]==null){
-                            continue;
-                        }
-                        else if(PassiveNum[count]!=null || PassiveNum[cu]!=null){
-                            System.out.println("등번호가 중복될 수 없습니다! 다시 시도하세요!\n");
-                            Ps.cleaner();
-                            Ps.Passive();
-                        }
+                        System.out.println("등번호가 중복될 수 없습니다! 다시 시도하세요!\n");
+                        Ps.Clean();
+                        Sq.Squard();
                     }
             }
         }
@@ -208,14 +204,6 @@ class Passive {
             System.out.println("선수명 : " + PassiveSelect[count] + "\n등번호 : " + PassiveNum[count] + "\n포지션 : " + PassivePosition[count] + "\n");
         }
     }
-        
-        public void cleaner() {
-            for(int PNum=0; PNum<PassiveNum.length; PNum++) {
-                PassiveSelect[PNum]=null;
-                PassiveSelect[PNum]=null;
-                PassivePosition[PNum]=null;
-            }
-        }
 
     public void PassiveShow() {
         Passive come = new Passive();
@@ -265,6 +253,14 @@ class Passive {
         }
         Infinity If = new Infinity();
         If.Infinity(1);
+    }
+    
+    public void Clean() {
+        int con=0;
+        String arr[] = {"clean1","clean2","clean3","clean4","clean5","clean6","clean7","clean8","clean9","clean10"};
+        for(int count=0; count<PassiveNum.length; count++)
+            PassiveNum[count]=null; PassiveNum[con]=arr[con];
+            con++;
     }
 }
 
