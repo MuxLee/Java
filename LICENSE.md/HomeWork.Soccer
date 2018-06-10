@@ -14,10 +14,10 @@ class Infinity {
         Strategy St = new  Strategy(); 
         while (true) {
             System.out.println("< = = = Main Menu = = = >");
-            System.out.println("1. My Team\n2. 전술\n3. 방출하기");
+            System.out.println("1. My Team\n2. 전술\n3. 방출하기\n4. 종료하기");
             Scanner NumChoice = new Scanner(System.in);
             choice = NumChoice.nextInt();
-            if(choice>3 || choice<1) {
+            if(choice>4 || choice<1) {
                 System.out.println("옳지 않는 번호 선택입니다!");
                 break;
             }
@@ -37,6 +37,8 @@ class Infinity {
                         Am.AutoRelease();
                     else if(this.num==2)
                         Pv.PassiveRelease();
+                case 4:
+                    return;
             }
         }
     }
@@ -114,6 +116,7 @@ class AutoMake {
     static String TeamName = get.NameCall();
     static String Director = get.TeamNameCall();
     Scanner input = new Scanner(System.in);
+    Infinity If = new Infinity();
 
     public AutoMake() {
     }
@@ -129,15 +132,15 @@ class AutoMake {
     
     public void AutoRelease() {
         int check=0;
-        System.out.print("방출 하실 선수의 [이름]을 입력해주세요! >> ");
+        System.out.print("방출 하실 선수의 [이름] 또는 [등번호]을/를 입력해주세요! >> ");
         input = new Scanner(System.in); String StrName = input.nextLine();
         for(int count=0; count<selectionAuto.length; count++) {
-            if(StrName.equals(selectionAuto[count])) {
+            if(StrName.equals(selectionAuto[count])||StrName.equals(selecNumAuto[count])) {
                 check++;
             }
         }
         for(int count=0; count<selectionAuto.length; count++) {
-            if(StrName.equals(selectionAuto[count])) {
+            if(StrName.equals(selectionAuto[count])||StrName.equals(selecNumAuto[count])) {
                 if(check==1){
                     selectionAuto[count]=null; selectionAuto[count]="방출";
                     selecNumAuto[count]=null; selecNumAuto[count]="방출";
@@ -161,7 +164,6 @@ class AutoMake {
                 }
             }
         }
-        Infinity If = new Infinity();
         If.Infinity(1);
     }
 }
@@ -175,6 +177,7 @@ class Passive {
     static String TeamName = get.NameCall();
     static String Director = get.TeamNameCall();
     Scanner input = new Scanner(System.in);
+    Infinity If = new Infinity();
 
     public void Passive() {
         Passive Ps = new Passive();
@@ -214,22 +217,28 @@ class Passive {
         for (int count = 0; count < PassiveSelect.length; count++) {
             System.out.println("선수명 : " + come.PassiveSelect[count] + "\n등번호 : " + come.PassiveNum[count] + "\n포지션 : " + come.PassivePosition[count] + "\n");
         }
-        Infinity If = new Infinity();
         If.Infinity(2);
     }
     
     public void PassiveRelease() {
         int check=0;
-        System.out.print("방출 하실 선수의 [이름]을 입력해주세요! >> ");
+        System.out.print("방출 하실 선수의 [이름] 또는 [등번호]을/를 입력해주세요! >> ");
         input = new Scanner(System.in); String StrName = input.nextLine();
         for(int count=0; count<PassiveSelect.length; count++) {
-            if(StrName.equals(PassiveSelect[count])) {
+            if(StrName.equals(PassiveSelect[count]) || StrName.equals(PassiveNum[count])) {
                 check++;
             }
         }
         for(int count=0; count<PassiveSelect.length; count++) {
-            if(StrName.equals(PassiveSelect[count])) {
+            if(StrName.equals(PassiveSelect[count])||StrName.equals(PassiveNum[count])) {
                 if(check==1){
+                    PassiveSelect[count]=null; PassiveSelect[count]="방출";
+                    PassiveNum[count]=null; PassiveNum[count]="방출";
+                    PassivePosition[count]=null; PassivePosition[count]="방출";
+                }
+            }
+            else if(StrName.equals(PassiveNum[count])||StrName.equals(PassiveNum[count])) {
+                if(check==1) {
                     PassiveSelect[count]=null; PassiveSelect[count]="방출";
                     PassiveNum[count]=null; PassiveNum[count]="방출";
                     PassivePosition[count]=null; PassivePosition[count]="방출";
@@ -251,6 +260,7 @@ class Passive {
                     PassivePosition[count]=null; PassivePosition[count]="방출";
                 }
             }
+            If.Infinity(2);
         }
     }
     
